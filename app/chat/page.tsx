@@ -1,5 +1,6 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
+import Form from "../components/Form";
 import { authOptions } from "../lib/auth";
 
 export default async function Home(){
@@ -9,8 +10,8 @@ export default async function Home(){
         redirect("/");
     }
     return(
-        <div className="absolute text-xl">
-            <h2>hey</h2>
+        <div className="h-screen bg-gray-200 flex flex-col">
+            <Form/>                    
         </div>
     )
 }

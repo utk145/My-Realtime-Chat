@@ -27,12 +27,13 @@ export default async function RootLayout({
       <head>  <link rel="shortcut icon" href="/faviconnew.ico" type="image/x-icon" />
       </head>
       <body className={inter.className}>
-        <nav className='flex px-10 py-5 justify-between fixed top-0 left-0 w-full bg-white'>
+        <nav className='flex px-10 py-5 justify-between fixed top-0 left-0 w-full bg-gray-100'>
           <h1 className='text-4xl font-bold'>Sheri<span className='orange_gradient'>Chat</span></h1>
 
           {/* Now we'll check if there is a session for enabling login or not */}
           {session ? (
             <div className="flex items-center">
+              <h3 className='mr-2'>Welcome, <span className='font-black'>{session?.user?.name}</span></h3>
               <Image src={session.user?.image as string || "https://img.freepik.com/free-photo/fashion-boy-with-yellow-jacket-blue-pants_71767-96.jpg?size=626&ext=jpg" as string} alt="User-pic" className='w-12 h-12 rounded-full mr-3 border-[4.2px] border-orange-500' width={50} height={50}/>
               <Logout/>
             </div>
