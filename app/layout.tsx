@@ -33,7 +33,7 @@ export default async function RootLayout({
           {/* Now we'll check if there is a session for enabling login or not */}
           {session ? (
             <div className="flex items-center">
-              <Image src={session.user?.image as string || "https://img.freepik.com/free-photo/fashion-boy-with-yellow-jacket-blue-pants_71767-96.jpg?size=626&ext=jpg" as string} alt="User-pic" className='w-12 h-12 rounded-full mr-3' width={50} height={50}/>
+              <Image src={session.user?.image as string || "https://img.freepik.com/free-photo/fashion-boy-with-yellow-jacket-blue-pants_71767-96.jpg?size=626&ext=jpg" as string} alt="User-pic" className='w-12 h-12 rounded-full mr-3 border-[4.2px] border-orange-500' width={50} height={50}/>
               <Logout/>
             </div>
           ) : (

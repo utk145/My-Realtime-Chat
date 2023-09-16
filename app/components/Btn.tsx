@@ -16,11 +16,17 @@ export function Logout() {
 
 export function Login() {
     return (
-        <button className='flex items-center justify-center bg-[#06C755] gap-2 rounded-lg px-8 py-3 text-center text-sm font-semibold text-white ring-red-300 transition duration-100 hover:bg-[#0f7238] md:text-base'
-            onClick={()=>signIn("reddit")}
+        <button className='flex items-center justify-center bg-orange-600 gap-2 rounded-lg px-8 py-3 text-center text-sm font-semibold text-white ring-red-300 transition duration-100 hover:bg-orange-500 md:text-base'
+            onClick={() => signIn("reddit")}
         >Login</button>
     )
 }
 
 
-
+export function MainLogin() {
+    return (
+        <button className='flex items-center justify-center bg-orange-600 gap-2 rounded-lg px-8 py-3 text-center text-sm font-semibold text-white ring-red-300 transition duration-100 hover:bg-orange-500 md:text-base w-full'
+            onClick={() => signIn("reddit")}
+        >Login with your reddit account</button>
+    )
+}
