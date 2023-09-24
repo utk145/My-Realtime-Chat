@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Pusher from "pusher-js";
 import { useState } from "react";
 
 interface ChatProp {
@@ -17,7 +18,18 @@ export default function ChatArea({ data }: ChatProp) {
 
     const [total, setTotal] = useState(data);
     // console.log(total);
-    
+
+    var pusher = new Pusher(process.env.NEXT_PUBLIC_PUSHER_key as string, {
+        cluster: 'ap2'
+    });
+
+
+    var channel = pusher.subscribe('my-channel');
+    channel.bind('my-event', function (data: any) {
+        alert(JSON.stringify(data));
+    });
+
+
     return (
         <div className="p-6 flex-grow max-h-screen py-32 overflow-y-auto">
             <div className="flex flex-col gap-4">
