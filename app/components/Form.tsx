@@ -1,12 +1,17 @@
 "use client";
-import React from 'react';
+import React, { useRef } from 'react';
 import { postData } from '../do';
 
 const Form = () => {
+
+    const formRef = useRef<HTMLFormElement>(null);
+
     return (
         <form className='p-6 fixed bottom-0 left-0 w-full bg-white'
-            action={async (formData)=>{await postData(formData)
+            action={async (formData)=>{await postData(formData);
+                formRef.current?.reset();
             }}
+            ref={formRef}
         >
             <div className="flex">
                 <input type="text" name='message' placeholder='Type a message' className='flex-grow py-2 px-4 outline-none' />

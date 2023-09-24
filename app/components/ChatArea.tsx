@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Pusher from "pusher-js";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface ChatProp {
     data: {
@@ -19,6 +19,9 @@ export default function ChatArea({ data }: ChatProp) {
     const [total, setTotal] = useState(data);
     // console.log(total);
 
+
+    const msgEnd = useRef<HTMLInputElement>(null);
+
     var pusher = new Pusher(process.env.NEXT_PUBLIC_PUSHER_key as string, {
         cluster: 'ap2'
     });
@@ -26,12 +29,22 @@ export default function ChatArea({ data }: ChatProp) {
 
     var channel = pusher.subscribe('my-channel');
     channel.bind('my-event', function (data: any) {
-        alert(JSON.stringify(data));
+        const parsedComments = JSON.parse(data.message);
+        setTotal((prev) => [...prev, parsedComments]);
     });
 
 
+    const scrollBtm = ()=>{
+        msgEnd.current?.scrollIntoView({behavior:"smooth"});
+    };
+
+    useEffect(() => {
+        scrollBtm();
+    }, [total])
+    
+
     return (
-        <div className="p-6 flex-grow max-h-screen py-32 overflow-y-auto">
+        <div className="p-6 flex-grow max-h-screen py-32 overflow-y-auto bg-[#202123]">
             <div className="flex flex-col gap-4">
                 {total.map((msg, indx) => (
                     <div key={indx} className=''>
@@ -42,6 +55,7 @@ export default function ChatArea({ data }: ChatProp) {
                         <p className="text-sm text-gray-700">{msg.User?.name as string}</p>
                     </div>
                 ))}
+                <div ref={msgEnd}></div>
             </div>
         </div>
     )
