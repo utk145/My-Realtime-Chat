@@ -22,26 +22,33 @@ export default function ChatArea({ data }: ChatProp) {
 
     const msgEnd = useRef<HTMLInputElement>(null);
 
-    var pusher = new Pusher(process.env.NEXT_PUBLIC_PUSHER_key as string, {
-        cluster: 'ap2'
-    });
+    useEffect(() => {
+        var pusher = new Pusher(process.env.NEXT_PUBLIC_PUSHER_key as string, {
+            cluster: 'ap2'
+        });
 
 
-    var channel = pusher.subscribe('my-channel');
-    channel.bind('my-event', function (data: any) {
-        const parsedComments = JSON.parse(data.message);
-        setTotal((prev) => [...prev, parsedComments]);
-    });
+        var channel = pusher.subscribe('my-channel');
+        channel.bind('my-event', function (data: any) {
+            const parsedComments = JSON.parse(data.message);
+            setTotal((prev) => [...prev, parsedComments]);
+        });
 
+        // Handling mesages appearing twice.For this we will unsubscibe from the websocket
+        return ()=>{
+            pusher.unsubscribe("my-channel");
+        } 
+        
+    }, [])
 
-    const scrollBtm = ()=>{
-        msgEnd.current?.scrollIntoView({behavior:"smooth"});
+    const scrollBtm = () => {
+        msgEnd.current?.scrollIntoView({ behavior: "smooth" });
     };
 
     useEffect(() => {
         scrollBtm();
     }, [total])
-    
+
 
     return (
         <div className="p-6 flex-grow max-h-screen py-32 overflow-y-auto bg-[#202123]">
