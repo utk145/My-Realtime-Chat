@@ -1,14 +1,15 @@
 import { PrismaAdapter } from "@/node_modules/@auth/prisma-adapter/index";
 import type { NextAuthOptions } from "@/node_modules/next-auth/index";
 import RedditProvider from "@/node_modules/next-auth/providers/reddit";
-import { PrismaClient } from '@prisma/client'
+import { prisma } from "./db";
+// import { PrismaClient } from '@prisma/client'
 
-const prismaInstance = new PrismaClient();
+// const prismaInstance = new PrismaClient(); // You shouldn't do this in production, rather use a global file 
 
 
 export const authOptions: NextAuthOptions = {
     // @ts-ignore
-    adapter:PrismaAdapter(prismaInstance),
+    adapter:PrismaAdapter(prisma),
     providers: [
         RedditProvider({
             clientId: process.env.REDDIT_CLIENT_ID as string,
