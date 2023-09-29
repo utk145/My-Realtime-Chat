@@ -31,5 +31,5 @@ npx prisma init
 
 ---
 
-https://github.com/utk145/My-Realtime-Chat/assets/122993091/f13f61d3-7ad8-43d2-8df8-a607df9fc116
+
 
