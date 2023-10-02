@@ -27,6 +27,7 @@ npx prisma init
 - Pusher
 - Supabase
 - Prisma
+- NextAuth
 - Deployed on Vercel
 
 ---
