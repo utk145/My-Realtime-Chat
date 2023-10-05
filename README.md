@@ -31,6 +31,9 @@ npx prisma init
 - Deployed on Vercel
 
 ---
+![ezgif com-video-to-gif](https://github.com/utk145/My-Realtime-Chat/assets/122993091/68726098-1c92-418b-a26d-d25755d63405)
+
+
 
 
 
